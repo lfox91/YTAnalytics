@@ -1,0 +1,107 @@
+doctype html
+html
+  head
+    title= title
+    link(href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" )
+    link(type="text/css" rel="stylesheet" href="/stylesheets/materialize-src/sass/materialize.css"  media="screen,projection")
+    link(type="text/css" rel='stylesheet', href='/stylesheets/style.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  body(class="orange darken-4")
+    block content     
+    script(src="https://code.jquery.com/jquery-2.2.2.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js")
+    script.
+      $(document).ready(function(){
+        var ctx = document.getElementById("gCanvas");
+        var firstDraw = true;
+        var gCanvas = null;
+        var data = !{JSON.stringify(data)};        
+        var dates = !{JSON.stringify(dates)};
+        
+        data = JSON.parse(data);
+        dates = JSON.parse(dates);
+        
+        showHideChart();
+        
+        $('select').material_select();
+        $('select').on('change', showHideChart);        
+        
+        function showHideChart(){
+          var select = document.getElementById('select')
+          var metric = select.options[select.selectedIndex].value;
+          applyDataToGraphs(metric, dates, data);
+        }
+        
+        Chart.defaults.global.defaultFontSize = "16px";
+        Chart.defaults.global.defaultFontStyle = "bold";
+        Chart.defaults.global.defaultFontColor = "rgb(220, 220, 220)";
+        
+        function applyDataToGraphs(metricInData, dates, data){
+          //create parsed copy of metricInData
+          //- console.log(metricInData, dates, data)
+          var currData = data[metricInData];
+          if(firstDraw){
+            var config = {
+              type: 'line',
+              data: {
+                labels: dates,
+                yLabels: metricInData,
+                datasets: [ {
+                  label: metricInData + " Per Day",
+                  fill: true,
+                  lineTension: 0,
+                  backgroundColor: "rgba(245, 135, 59, 0.6)",
+                  borderColor: "#18ffff",
+                  pointBorderColor: "#18ffff",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "#18ffff",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 1,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  showLines: true,
+                  borderWidth: "5px",
+                  data: currData,
+                } ]        
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                  yAxes: [{
+                    gridLines:{
+                      color: "#4ED9AB",
+                    },
+                    scaleLabel:{},
+                    ticks:{},
+                  }],
+                  xAxes: [{
+                    gridLines:{
+                      color: "#4ED9AB",
+                    },
+                    scaleLabel:{},
+                    ticks:{},
+                  }]
+                 }      
+              }
+            }
+            gCanvas = new Chart(ctx, config);
+            firstDraw = false;
+          }
+          else { 
+            console.log("not first draw");
+            gCanvas.reset();
+            console.log(currData, metricInData)
+            gCanvas.data.datasets[0].data[0] = 1;
+            gCanvas.update();
+            console.table(gCanvas);
+          }
+        }             
+      })        
+      
+    
+//-   pan: {enabled: true, mode: 'xy'},
+  zoom: {enabled: true, mode: 'xy'},

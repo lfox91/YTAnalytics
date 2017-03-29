@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  header
+    h1= title
+
+  div(class='row')
+    form(action='/video' method="post" class='col s12')
+      div(class="col s12 m12")
+        label(for='vid') Input your video ID
+        input(type='textbox' id='vid' name='vid')
+      div(class="col s12 m6")
+        label(for='sd') Select a Start date
+        input( type='date' id='sd' class='datepicker' name='sd')
+
+      div(class="col s12 m6")
+        label(for='ed') Select an End date
+        input( type='date' id='ed' class='datepicker' name='ed')
+
+      fieldset( name='metrics' class="col s12 m8 offset-m2" )
+        legend Select the metrics you would like to view
+        p
+          input(type='checkbox' class='filled-in' id='likes' name='likes' checked='checked')
+          label(for='likes') Likes
+        p
+          input(type='checkbox' class='filled-in' id='dislikes' name='dislikes' checked='checked')
+          label(for='dislikes') Dislikes
+        p
+          input(type='checkbox' class='filled-in' id='comments' name='comments' checked='checked')
+          label(for='comments') Comments
+        p
+          input(type='checkbox' class='filled-in' id='shares' name='shares' checked='checked')
+          label(for='shares') Shares
+        p
+          input(type='checkbox' class='filled-in' id='watchTime' name='estimatedMinutesWatched' checked='checked')
+          label(for='watchTime') Watch Time
+        p
+          input(type='checkbox' class='filled-in' id='avgViewDuration' name='averageViewDuration' checked='checked')
+          label(for='avgViewDuration') Average View Duration
+        p
+          input(type='checkbox' class='filled-in' id='views' name='views' checked='checked')
+          label(for='views') Views
+        //- p
+        //-   input(type='checkbox' class='filled-in' id='geoPercentWatchtime' name='geoPercentWatchtime' checked='checked')
+        //-   label(for='geoPercentWatchtime') Geographical Watch Time Percentages
+        //- p
+        //-   input(type='checkbox' class='filled-in' id='trafficSources' name='trafficSources' checked='checked')
+        //-   label(for='trafficSources') Traffic Sources
+        //- p
+        //-   input(type='checkbox' class='filled-in' id='playbackLocation' name='playbackLocation' checked='checked')
+        //-   label(for='playbackLocation') Play Back Location
+        //- p
+        //-   input(type='checkbox' class='filled-in' id='gender' name='gender' checked='checked')
+        //-   label(for='gender') Gender
+
+      button(type='submit' class='s6 offset-s3') Submit Your Request

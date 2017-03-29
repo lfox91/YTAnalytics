@@ -1,0 +1,79 @@
+@import "materialize-src/sass/materialize.scss";
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+body{
+  background: #30E8BF;
+  background: -webkit-linear-gradient(to left, #30E8BF , #FF8235);
+  background: linear-gradient(to left, #30E8BF , #FF8235);
+}
+
+a {
+  color: #00B7FF;
+}
+
+h1 {
+  margin: 2%;
+  color: #eceff1;
+}
+
+label {
+  display: block;
+}
+
+div.video > iframe{
+  height:30vh;
+  padding: 0;
+  margin:0;
+  width: 100%;
+}
+
+div.video{
+  width: 100vw;
+  margin: 0;
+  background: #48DCAF;
+}
+input[type="submit"] {
+  display: block;
+}
+
+section.row{
+  height: 20vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.input-field{
+  margin: 0;
+}
+
+div.graphContainer {
+  border-top: 5px #E68E46 solid;
+  position: relative;
+  width:100vw;
+  height: 50vh;
+  background: rgba(#23a185, 0.5);
+  background: -webkit-linear-gradient(to left, rgba(#23a185, 0.5) , rgba(#d16c2e, 0.3));
+  background: linear-gradient(to left, rgba(#23a185, 0.5) , rgba(#d16c2e, 0.3));
+}
+// .chartjs-hidden-iframe {
+//   border:2px solid white;
+//   height: 100% !important;
+// }
+// canvas {
+//   height: 50vh !important;
+//   width: 100vw !important;
+// }
+
+
+// @media #{$small-and-down} {
+//   div .show > canvas {
+//     width: 100%;
+//     height: 70vh;
+//     max-height:70vh;
+//   }
+// }
