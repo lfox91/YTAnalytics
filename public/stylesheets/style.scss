@@ -50,12 +50,15 @@ section.row{
 .input-field{
   margin: 0;
 }
-
+div.graphContainerContainer{
+  width: 100vw;
+  height: 50vh;
+}
 div.graphContainer {
   border-top: 5px #E68E46 solid;
   position: relative;
-  width:100vw;
-  height: 50vh;
+  width: 100%;
+  height: 100%;
   background: rgba(#23a185, 0.5);
   background: -webkit-linear-gradient(to left, rgba(#23a185, 0.5) , rgba(#d16c2e, 0.3));
   background: linear-gradient(to left, rgba(#23a185, 0.5) , rgba(#d16c2e, 0.3));

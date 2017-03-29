@@ -1,14 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var logger = require('morgan');
-
-var   ACCESS_TOKEN = require('../gAuth').ACCESS_TOKEN;
-var  REFRESH_TOKEN = require('../gAuth').REFRESH_TOKEN;
-var      CLIENT_ID = require('../gAuth').CLIENT_ID;
-var  CLIENT_SECRET = require('../gAuth').CLIENT_SECRET;
-var         SCOPES = require('../gAuth').SCOPES;
-var         google = require('googleapis');
-var         OAuth2 = google.auth.OAuth2;
+var env = process.env
+var ACCESS_TOKEN = env.ACCESS_TOKEN || require('../gAuth').ACCESS_TOKEN;
+var REFRESH_TOKEN = env.REFRESH_TOKEN ||require('../gAuth').REFRESH_TOKEN;
+var CLIENT_ID = env.CLIENT_ID || require('../gAuth').CLIENT_ID;
+var CLIENT_SECRET = env.CLIENT_SECRET || require('../gAuth').CLIENT_SECRET;
+var CHANNEL_ID = env.CHANNEL_ID || require('../gAuth').CHANNEL_ID;
+var SCOPES = [
+  'https://www.googleapis.com/auth/yt-analytics.readonly',
+  'https://www.googleapis.com/auth/youtubepartner',
+  'https://www.googleapis.com/auth/youtube.readonly',
+  'https://www.googleapis.com/auth/youtube'
+]
+var google = require('googleapis');
+var OAuth2 = google.auth.OAuth2;
 
 //create gapi OAUTH hard code ACCESS and REFRESH token
 var auth = new OAuth2( CLIENT_ID, CLIENT_SECRET, 'localhost:3000' );
@@ -44,7 +50,7 @@ router.post('/', function(req, res, next) {
     version: 'v1beta1',
     auth: auth,
     params: {
-      ids: 'channel==UC5fyJ9G1p0gsvZ3sFAXIuZw',
+      ids: 'channel=='+CHANNEL_ID,
       'start-date': startDate,
       'end-date': endDate,
       metrics: metrics,

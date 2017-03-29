@@ -1648,7 +1648,6 @@ summary {
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
 audio,
-canvas,
 progress,
 video {
   display: inline-block;
