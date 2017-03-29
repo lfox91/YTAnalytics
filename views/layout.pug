@@ -8,7 +8,7 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
   body(class="orange darken-4")
     block content     
-    script(src="https://code.jquery.com/jquery-2.2.2.min.js")
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js")
     script.
@@ -34,9 +34,9 @@ html
           applyDataToGraphs(metric, dates, data);
         }
         
-        Chart.defaults.global.defaultFontSize = "16px";
+        Chart.defaults.global.defaultFontSize = 14;
         Chart.defaults.global.defaultFontStyle = "bold";
-        Chart.defaults.global.defaultFontColor = "rgb(220, 220, 220)";
+        Chart.defaults.global.defaultFontColor = "rgb(250, 250, 250, .87)";
         
         function applyDataToGraphs(metricInData, dates, data){
           var currData = data[metricInData];
@@ -56,12 +56,12 @@ html
                 pointBorderWidth: 1,
                 pointHoverRadius: 5,
                 pointHoverBackgroundColor: "#18ffff",
-                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderColor: "white",
                 pointHoverBorderWidth: 1,
-                pointRadius: 1,
+                pointRadius: 2,
                 pointHitRadius: 10,
                 showLines: true,
-                borderWidth: "5px",
+                borderWidth: 2,
                 data: currData,
               } ]        
             },
@@ -77,10 +77,16 @@ html
                   ticks:{},
                 }],
                 xAxes: [{
+                  type: "time",
                   gridLines:{
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    display: false,
                     color: "#4ED9AB",
                   },
-                  scaleLabel:{},
+                  scaleLabel:{
+                    
+                  },
                   ticks:{},
                 }]
                }      
@@ -88,7 +94,7 @@ html
           }
           if(firstDraw){    
             window.gCanvas = new Chart(ctx, config);
-            console.log(gCanvas)
+            console.log(gCanvas);
             firstDraw = false;
           }
           else { 
